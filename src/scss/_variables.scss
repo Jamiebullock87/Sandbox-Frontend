@@ -1,0 +1,27 @@
+// Global Colors
+$color-primary: #B4D455;
+$color-secondary: #DE3C4B;
+$white: #F7F7F7;
+$black: #303030;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Spartan:400,600,700&display=swap');
+$font: 'Spartan';
+
+:root {
+    --primary-color: #03A1FF;
+    --secondary-color: #FF8C00;
+    --font-color: #272727;
+    --bg-color: #fff;
+    --bg-light-shadow: #dedede;
+    --bg-dark-shadow: #a4a4a4;
+}
+
+[data-theme="dark"] {
+    --primary-color: #8400ff;
+    --secondary-color: #818cab;
+    --font-color: #efefef;
+    --bg-color: #191919;
+    --bg-light-shadow: #262626;
+    --bg-dark-shadow: #0d0d0d;
+}
