@@ -3,22 +3,6 @@ import Cookies from 'universal-cookie';
 
 const COOKIES = new Cookies();
 
-        // if (currentTheme) {
-        //     if (currentTheme === 'dark') {
-        //         this.state = {
-        //             theme: 'dark'
-        //         }
-        //     } else if (currentTheme === 'light') {
-        //         this.state = {
-        //             theme: 'light'
-        //         }
-        //     }
-        // } else {
-        //     this.state = {
-        //         theme: 'light'
-        //     }
-        // }
-
 let state = store({
     currentTheme: localStorage.getItem('theme') ? localStorage.getItem('theme') : 'dark',
     loading: false, // uses loading screen when true

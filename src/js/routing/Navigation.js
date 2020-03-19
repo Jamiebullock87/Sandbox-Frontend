@@ -26,6 +26,9 @@ class Navigation extends Component {
             <NavLink to="/link4" activeClassName="selected">
                 <i className="fas fa-2x fa-rocket" />
             </NavLink>
+            <NavLink to="/chat" activeClassName="selected">
+                <i class="far fa-2x fa-comments"></i>
+            </NavLink>
             <NavLink to="/user-profile" activeClassName="selected">
                 <i className="fas fa-2x fa-user-astronaut" />
             </NavLink>
