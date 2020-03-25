@@ -8,4 +8,8 @@ html, body, #root {
 .content {
     background-color: var(--bg-color);
     color: var(--font-color);
+    padding: 40px;
+    h1 {
+        margin-bottom: 20px;
+    }
 }

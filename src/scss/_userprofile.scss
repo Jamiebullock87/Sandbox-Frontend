@@ -1,0 +1,23 @@
+.user-profile {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-gap: 20px;
+    margin-bottom: 30px;
+}
+.file-input {
+    -webkit-appearance: none;
+    opacity: 0;
+    z-index: -1;
+    position: relative;
+    max-width: 1px;
+    width: 1px;
+}
+.file-input-label {
+    display: block;
+    text-align:center;
+    border: 1px solid var(--font-color);
+    color: var(--font-color);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

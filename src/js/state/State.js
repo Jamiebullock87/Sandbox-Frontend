@@ -4,8 +4,11 @@ import Cookies from 'universal-cookie';
 const COOKIES = new Cookies();
 
 let state = store({
+    // Global Stuff
     currentTheme: localStorage.getItem('theme') ? localStorage.getItem('theme') : 'dark',
     loading: false, // uses loading screen when true
+
+    // Auth
     login: {
         email: {
             value: '',
@@ -30,10 +33,18 @@ let state = store({
             valid: true
         },
     },
-
     invalidLogin: false,
     invalidRegister: false,
     sessionID: COOKIES.get('_piedPiperSession') ? COOKIES.get('_piedPiperSession') : false,
+
+    // User Profile
+    loggedInUser: {
+        firstName: null,
+        lastName: null,
+        email: '',
+        image: '',
+        whatTheme: 'dark'
+    }
 });
 
 export default state;

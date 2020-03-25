@@ -111,6 +111,7 @@ class Login extends Component {
                     state.invalidLogin = false;
                     state.sessionID = res.token;
                     COOKIES.set('_piedPiperSession', res.token);
+                    state.loggedInUser.email = auth.email;
                     state.loading = false;
                 } else if (res.passwordincorrect === "Password incorrect") {
                     COOKIES.remove('_piedPiperSession');
@@ -172,45 +173,47 @@ class Login extends Component {
                             <h1>Sign in</h1>
                             <h2>Enter your login details below to get started</h2>
                         </div>
-                        <div className="form-group">
-                            <input
-                                id="login-email"
-                                onChange={e => this.handleInput(e.currentTarget.value, e.currentTarget.id)}
-                                onBlur={e => this.handleValidation(e.currentTarget.value, e.currentTarget.id)}
-                                type="email"
-                                className="form-input"
-                                required
-                            />
-                            <label className="form-label">E-mail Address</label>
-                            {!state.login.email.valid ? (
-                                <span className="invalid">
-                                    <i className="fas fa-exclamation-circle" />
-                                    Invalid email address
-                                </span>
-                            ) : (
-                            <span />
-                            )}
-                        </div>
-                        <div className="form-group">
-                            <input
-                                id="login-password"
-                                onChange={e => this.handleInput(e.currentTarget.value, e.currentTarget.id)}
-                                onBlur={e => this.handleValidation(e.currentTarget.value, e.currentTarget.id)}
-                                type="password"
-                                className="form-input"
-                                required
-                            />
-                            <label className="form-label">Password</label>
-                            {!state.login.password.valid ? (
-                                <span className="invalid">
-                                    <i className="fas fa-exclamation-circle" />
-                                    Invalid password, please use at least 8 characters
-                                </span>
-                            ) : (
-                            <span />
-                            )}
-                        </div>
-                        <button className="panel-button" onClick={this.handleSignIn}>Sign In</button>
+                        <form className="login-form" onSubmit={this.handleSignIn}>
+                            <div className="form-group">
+                                <input
+                                    id="login-email"
+                                    onChange={e => this.handleInput(e.currentTarget.value, e.currentTarget.id)}
+                                    onBlur={e => this.handleValidation(e.currentTarget.value, e.currentTarget.id)}
+                                    type="email"
+                                    className="form-input"
+                                    required
+                                />
+                                <label className="form-label">E-mail Address</label>
+                                {!state.login.email.valid ? (
+                                    <span className="invalid">
+                                        <i className="fas fa-exclamation-circle" />
+                                        Invalid email address
+                                    </span>
+                                ) : (
+                                <span />
+                                )}
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    id="login-password"
+                                    onChange={e => this.handleInput(e.currentTarget.value, e.currentTarget.id)}
+                                    onBlur={e => this.handleValidation(e.currentTarget.value, e.currentTarget.id)}
+                                    type="password"
+                                    className="form-input"
+                                    required
+                                />
+                                <label className="form-label">Password</label>
+                                {!state.login.password.valid ? (
+                                    <span className="invalid">
+                                        <i className="fas fa-exclamation-circle" />
+                                        Invalid password, please use at least 8 characters
+                                    </span>
+                                ) : (
+                                <span />
+                                )}
+                            </div>
+                            <button type="submit" className="panel-button">Sign In</button>
+                        </form>
                         {state.invalidLogin ? (
                             <p className="invalid">
                                 <i className="fas fa-exclamation-circle" />

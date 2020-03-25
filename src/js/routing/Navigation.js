@@ -7,6 +7,13 @@ const COOKIES = new Cookies();
 
 class Navigation extends Component {
     handleSignOut() {
+        fetch('http://localhost:8081/api/users/logout', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': state.sessionID
+            },
+        })
         COOKIES.remove('_piedPiperSession');
         state.sessionID = null;
     }
@@ -27,7 +34,7 @@ class Navigation extends Component {
                 <i className="fas fa-2x fa-rocket" />
             </NavLink>
             <NavLink to="/chat" activeClassName="selected">
-                <i class="far fa-2x fa-comments"></i>
+                <i className="far fa-2x fa-comments"></i>
             </NavLink>
             <NavLink to="/user-profile" activeClassName="selected">
                 <i className="fas fa-2x fa-user-astronaut" />

@@ -93,24 +93,33 @@ class Register extends Component {
     handleRegister = () => {
         if (state.register.email.valid && state.register.password.valid && state.register.password2.valid) {
             state.loading = true;
-            const auth = Object.keys(state.register).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(state.register[key])).join('&');
-            console.log(auth);
+            const register = {
+                email: state.register.email.value,
+                password: state.register.password.value,
+                password2: state.register.password2.value,
+            }
+            const encoded = Object.keys(register).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(register[key])).join('&');
             fetch('http://localhost:8081/api/users/register', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                 },
-                body: auth
+                body: encoded
             })
-            .then(() => {
-                const login = Object.keys(state.register).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(state.register[key])).join('&');
+            .then((res) => {
+                console.log(res);
+                const login = {
+                    email: state.register.email.value,
+                    password: state.register.password.value,
+                }
+                const encodedLogin = Object.keys(login).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(login[key])).join('&');
                 console.log(login);
                 fetch('http://localhost:8081/api/users/login', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     },
-                    body: login
+                    body: encodedLogin
                 })
                 .then(res => res.json())
                 .then((res) => {
@@ -118,6 +127,7 @@ class Register extends Component {
                     state.sessionID = res.token;
                     console.log(state);
                     COOKIES.set('_piedPiperSession', res.token);
+                    state.loggedInUser.email = login.email;
                     state.loading = false;
                 })
                 .catch((err) => {
