@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Codename - Pied Piper - just a bit of a fun really
+Codename - Pied Piper :) 
 
 ## Available Scripts
 
