@@ -1,4 +1,5 @@
 .radio-selection {
+    margin: 10px 0;
     input[type=radio] {
         display: none;
     }
@@ -15,5 +16,6 @@
         border-radius: 5px;
         display: inline-block;
         margin-top: 10px;
+        cursor: pointer;
     }
 }

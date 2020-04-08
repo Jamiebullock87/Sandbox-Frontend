@@ -38,13 +38,17 @@ let state = store({
     sessionID: COOKIES.get('_piedPiperSession') ? COOKIES.get('_piedPiperSession') : false,
 
     // User Profile
+    editUser: {
+        firstName: null,
+        lastName: null,
+    },
     loggedInUser: {
         firstName: null,
         lastName: null,
         email: '',
         image: '',
         whatTheme: 'dark'
-    }
+    },
 });
 
 export default state;

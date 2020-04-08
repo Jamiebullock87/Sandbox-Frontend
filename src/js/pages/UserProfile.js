@@ -4,28 +4,21 @@ import { view } from 'react-easy-state';
 import state from '../state/State';
 // import Loader from '../generic/Loader';
 import RadioSelector from '../generic/RadioSelector';
+import UpdateName from '../components/UpdateName';
 // import Cookies from 'universal-cookie';
 
 class UserProfile extends Component {
-    componentDidMount() {
-        const email = JSON.stringify({email: state.loggedInUser.email});
-        fetch('http://localhost:8081/api/users/getprofile', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: email
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-        })
+    constructor() {
+        super();
+        this.state = {
+            updateName: false
+        }
     }
     handleSave = () => {
         const body = JSON.stringify({
             email: state.loggedInUser.email,
-            firstName: state.loggedInUser.firstName,
-            lastName: state.loggedInUser.lastName,
+            firstName: state.editUser.firstName,
+            lastName: state.editUser.lastName,
             image: state.loggedInUser.image,
             whatTheme: state.loggedInUser.whatTheme
         })
@@ -39,34 +32,31 @@ class UserProfile extends Component {
         .then(res => res.json())
         .then(res => {
             console.log(res);
+            state.loggedInUser.firstName = res.firstName;
+            state.loggedInUser.lastName = res.lastName;
+            document.documentElement.setAttribute('data-theme', state.loggedInUser.whatTheme);
         })
     }
     render() {
         return (
             <>
                 <h1>User Profile</h1>
-                <h2>E-Mail: {state.loggedInUser.email}</h2>
-                    <h2>Welcome {state.loggedInUser.firstName} {state.loggedInUser.lastName}</h2>
                         <div className="user-profile">
                             <div>
-                                <div className="form-group">
-                                    <input
-                                        id="first-name"
-                                        onChange={e => { state.loggedInUser.firstName = e.currentTarget.value; }}
-                                        type="text"
-                                        className="form-input"
-                                    />
-                                    <label className="form-label">First Name</label>
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        id="last-name"
-                                        onChange={e => { state.loggedInUser.lastName = e.currentTarget.value; }}
-                                        type="text"
-                                        className="form-input"
-                                    />
-                                    <label className="form-label">Last Name</label>
-                                </div>
+                                {state.loggedInUser.firstName ? 
+                                    <>
+                                    <h2>Welcome back {state.loggedInUser.firstName} {state.loggedInUser.lastName}</h2>
+                                    <button onClick={() => this.setState(prevState => ({updateName: !prevState.updateName}))}>Change Name?</button>
+                                    </>
+                                    :
+                                    <UpdateName />
+                                }
+                                {this.state.updateName ? 
+                                    <UpdateName />
+                                    :
+                                    ''
+                                }
+                                
                                 <RadioSelector
                                     heading="Preferred Theme"
                                     name="theme"
@@ -75,7 +65,7 @@ class UserProfile extends Component {
                                     { text: 'Light', value: 'light' }
                                     ]}
                                     onChange={e => { state.loggedInUser.whatTheme = e }}
-                                    default={"dark"}
+                                    default={state.loggedInUser.whatTheme}
                                 />
                             </div>
                             <div>
@@ -84,7 +74,7 @@ class UserProfile extends Component {
                                 <label className="file-input-label" htmlFor="profile-img">Upload / Change</label>
                             </div>
                         </div>
-                        <button onClick={this.handleSave}>Save</button>
+                        <button className="btn-main" onClick={this.handleSave}>Save</button>
             </>
         )
     }

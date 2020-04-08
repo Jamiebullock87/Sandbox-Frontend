@@ -109,8 +109,8 @@ class Login extends Component {
             .then((res) => {
                 if (res.success === true) {
                     state.invalidLogin = false;
-                    state.sessionID = res.token;
-                    COOKIES.set('_piedPiperSession', res.token);
+                    state.sessionID = res.token.split(' ')[1];
+                    COOKIES.set('_piedPiperSession', res.token.split(' ')[1]);
                     state.loggedInUser.email = auth.email;
                     state.loading = false;
                 } else if (res.passwordincorrect === "Password incorrect") {

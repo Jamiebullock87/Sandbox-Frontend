@@ -11,7 +11,7 @@ class Navigation extends Component {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': state.sessionID
+                'Authorization': `Bearer ${state.sessionID}`
             },
         })
         COOKIES.remove('_piedPiperSession');

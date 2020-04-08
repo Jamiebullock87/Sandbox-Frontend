@@ -124,9 +124,9 @@ class Register extends Component {
                 .then(res => res.json())
                 .then((res) => {
                     state.invalidLogin = false;
-                    state.sessionID = res.token;
+                    state.sessionID = res.token.split(' ')[1];
                     console.log(state);
-                    COOKIES.set('_piedPiperSession', res.token);
+                    COOKIES.set('_piedPiperSession', res.token.split(' ')[1]);
                     state.loggedInUser.email = login.email;
                     state.loading = false;
                 })
