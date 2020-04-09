@@ -127,7 +127,6 @@ class Register extends Component {
                     state.sessionID = res.token.split(' ')[1];
                     console.log(state);
                     COOKIES.set('_piedPiperSession', res.token.split(' ')[1]);
-                    state.loggedInUser.email = login.email;
                     state.loading = false;
                 })
                 .catch((err) => {

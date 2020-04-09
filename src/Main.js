@@ -9,6 +9,11 @@ import state from './js/state/State';
 const COOKIES = new Cookies();
 
 class Main extends Component {
+    constructor() {
+        super();
+        state.sessionID = COOKIES.get('_piedPiperSession');
+        console.log(state.sessionID);
+    }
     componentDidMount() {
         fetch('http://localhost:8081/api/authorization', {
             method: 'get',
@@ -19,6 +24,7 @@ class Main extends Component {
             }
         })
         .then((res) => {
+            console.log(res);
             const email = JSON.stringify({email: state.loggedInUser.email});
             fetch('http://localhost:8081/api/users/getprofile', {
                 method: 'post',
@@ -29,6 +35,7 @@ class Main extends Component {
             })
             .then(res => res.json())
             .then(res => {
+                console.log(res);
                 state.loggedInUser.firstName = res.firstName;
                 state.loggedInUser.lastName = res.lastName;
                 state.loggedInUser.image = res.image;

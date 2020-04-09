@@ -111,7 +111,6 @@ class Login extends Component {
                     state.invalidLogin = false;
                     state.sessionID = res.token.split(' ')[1];
                     COOKIES.set('_piedPiperSession', res.token.split(' ')[1]);
-                    state.loggedInUser.email = auth.email;
                     state.loading = false;
                 } else if (res.passwordincorrect === "Password incorrect") {
                     COOKIES.remove('_piedPiperSession');
