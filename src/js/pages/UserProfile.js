@@ -5,7 +5,10 @@ import state from '../state/State';
 // import Loader from '../generic/Loader';
 import RadioSelector from '../generic/RadioSelector';
 import UpdateName from '../components/UpdateName';
-// import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie';
+import config from '../../config';
+
+const COOKIES = new Cookies();
 
 class UserProfile extends Component {
     constructor() {
@@ -14,17 +17,53 @@ class UserProfile extends Component {
             updateName: false
         }
     }
-    handleSave = () => {
-        const body = JSON.stringify({
-            email: state.loggedInUser.email,
-            firstName: state.editUser.firstName,
-            lastName: state.editUser.lastName,
-            image: state.loggedInUser.image,
-            whatTheme: state.loggedInUser.whatTheme
-        })
-        fetch('http://localhost:8081/api/users/saveprofile', {
+    componentDidMount() {
+        // Get currently logged in user profile
+        fetch(config.apiEndpoint + '/restricted/getprofile', {
             method: 'post',
             headers: {
+                Authorization: `Bearer ${state.sessionID}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: null
+        })
+        .then(res => res.json())
+        .then(res => {
+            // Set local state with whats fetched from the db and hence whats on this page
+            state.loggedInUser.firstName = res.firstName;
+            state.loggedInUser.lastName = res.lastName;
+            state.loggedInUser.email = res.email;
+            state.loggedInUser.image = res.image;
+            state.loggedInUser.whatTheme = res.whatTheme;
+            console.log(state.loggedInUser);
+        })
+    }
+
+    handleSave = () => {
+        let body;
+        if (this.state.updateName) {
+            body = JSON.stringify({
+                firstName: state.editUser.firstName,
+                lastName: state.editUser.lastName,
+                email: state.loggedInUser.email,
+                image: state.loggedInUser.image,
+                whatTheme: state.loggedInUser.whatTheme,
+            })
+        } else {
+            body = JSON.stringify({
+                firstName: state.loggedInUser.firstName,
+                lastName: state.loggedInUser.lastName,
+                email: state.loggedInUser.email,
+                image: state.loggedInUser.image,
+                whatTheme: state.loggedInUser.whatTheme,
+            })
+        }
+        fetch(config.apiEndpoint + '/restricted/saveprofile', {
+            method: 'post',
+            headers: {
+                Authorization: `Bearer ${state.sessionID}`,
+                Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: body
@@ -34,7 +73,23 @@ class UserProfile extends Component {
             console.log(res);
             state.loggedInUser.firstName = res.firstName;
             state.loggedInUser.lastName = res.lastName;
-            document.documentElement.setAttribute('data-theme', state.loggedInUser.whatTheme);
+            state.loggedInUser.email = res.email;
+            state.loggedInUser.image = res.image;
+            state.loggedInUser.whatTheme = res.whatTheme;
+            let cookieOpts;
+            if (config.nodeEnv === 'production') {
+                cookieOpts = {
+                    secure: true,
+                    httpOnly: true
+                }
+            } else if (config.nodeEnv === 'development') {
+                cookieOpts = {
+                    secure: false,
+                    httpOnly: false
+                }
+            }
+            COOKIES.set('_piedPiperTheme', res.whatTheme, cookieOpts);
+            document.documentElement.setAttribute('data-theme', COOKIES.get('_piedPiperTheme'));
         })
     }
     render() {
@@ -69,7 +124,7 @@ class UserProfile extends Component {
                                 />
                             </div>
                             <div>
-                                <img src="https://via.placeholder.com/200x250" alt=""/>
+                                <img src={state.loggedInUser.image != null && state.loggedInUser.image.length > 0 ? state.loggedInUser.image : 'https://via.placeholder.com/200x250'} alt=""/>
                                 <input className="file-input" id="profile-img" name="profile-img" type="file"/>
                                 <label className="file-input-label" htmlFor="profile-img">Upload / Change</label>
                             </div>

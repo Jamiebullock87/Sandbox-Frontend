@@ -15,6 +15,7 @@ class Navigation extends Component {
             },
         })
         COOKIES.remove('_piedPiperSession');
+        COOKIES.remove('_piedPiperTheme');
         state.sessionID = null;
     }
     render() {

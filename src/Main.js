@@ -12,10 +12,9 @@ class Main extends Component {
     constructor() {
         super();
         state.sessionID = COOKIES.get('_piedPiperSession');
-        console.log(state.sessionID);
     }
     componentDidMount() {
-        fetch('http://localhost:8081/api/authorization', {
+        fetch('http://localhost:8081/api/restricted/dashboard', {
             method: 'get',
             headers: {
                 Authorization: `Bearer ${state.sessionID}`,
@@ -24,25 +23,7 @@ class Main extends Component {
             }
         })
         .then((res) => {
-            console.log(res);
-            const email = JSON.stringify({email: state.loggedInUser.email});
-            fetch('http://localhost:8081/api/users/getprofile', {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: email
-            })
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-                state.loggedInUser.firstName = res.firstName;
-                state.loggedInUser.lastName = res.lastName;
-                state.loggedInUser.image = res.image;
-                state.loggedInUser.whatTheme = res.whatTheme;
-                console.log(state.loggedInUser);
-                document.documentElement.setAttribute('data-theme', state.loggedInUser.whatTheme);
-            })
+            console.log('Authorized with token');
         })
         .catch((err) => {
             state.sessionID = null;

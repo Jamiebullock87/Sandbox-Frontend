@@ -5,6 +5,7 @@ import state from '../state/State';
 import Loader from '../generic/Loader';
 import Particles from 'react-particles-js';
 import Cookies from 'universal-cookie';
+import config from '../../config';
 
 const COOKIES = new Cookies();
 
@@ -110,7 +111,20 @@ class Login extends Component {
                 if (res.success === true) {
                     state.invalidLogin = false;
                     state.sessionID = res.token.split(' ')[1];
-                    COOKIES.set('_piedPiperSession', res.token.split(' ')[1]);
+                    let cookieOpts;
+                    if (config.nodeEnv === 'production') {
+                        cookieOpts = {
+                            secure: true,
+                            httpOnly: true
+                        }
+                    } else if (config.nodeEnv === 'development') {
+                        cookieOpts = {
+                            secure: false,
+                            httpOnly: false
+                        }
+                    }
+                    COOKIES.set('_piedPiperSession', res.token.split(' ')[1], cookieOpts);
+                    COOKIES.set('_piedPiperTheme', res.theme, cookieOpts);
                     state.loading = false;
                 } else if (res.passwordincorrect === "Password incorrect") {
                     COOKIES.remove('_piedPiperSession');

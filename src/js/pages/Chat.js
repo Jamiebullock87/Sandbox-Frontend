@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { view } from 'react-easy-state';
 import 'whatwg-fetch';
-import socketClient from 'socket.io-client';
+// import socketClient from 'socket.io-client';
 import Messages from '../components/Messages';
-const socket = socketClient('http://localhost:8000');
+// const socket = socketClient('http://localhost:8000');
 
 class Chat extends Component {
     constructor() {
@@ -14,18 +14,18 @@ class Chat extends Component {
         }
     }
     sendSocketIO = (e, msg) => {
-        e.preventDefault();
-        socket.emit('message', msg, (data) => {
-            console.log(data);
-            this.setState(state => {
-                const chatHistory = [...state.chatHistory, data];
-                return {
-                    chatHistory,
-                    input: '',
-                };
-            });
-            console.log(this.state);
-        });
+        // e.preventDefault();
+        // socket.emit('message', msg, (data) => {
+        //     console.log(data);
+        //     this.setState(state => {
+        //         const chatHistory = [...state.chatHistory, data];
+        //         return {
+        //             chatHistory,
+        //             input: '',
+        //         };
+        //     });
+        //     console.log(this.state);
+        // });
     }
     render() {
         return (
