@@ -14,7 +14,7 @@ class Main extends Component {
         state.sessionID = COOKIES.get('_piedPiperSession');
     }
     componentDidMount() {
-        fetch('http://localhost:8081/api/restricted/dashboard', {
+        fetch('http://localhost:8081/api/restricted/authcheck', {
             method: 'get',
             headers: {
                 Authorization: `Bearer ${state.sessionID}`,
@@ -30,6 +30,7 @@ class Main extends Component {
             COOKIES.remove('_piedPiperSession');
             console.log(err);
         });
+        document.documentElement.setAttribute('data-theme', COOKIES.get('_piedPiperTheme'));
     }
     render() {
         return (

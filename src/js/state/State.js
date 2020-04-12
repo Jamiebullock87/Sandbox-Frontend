@@ -49,6 +49,12 @@ let state = store({
         image: '',
         whatTheme: 'dark'
     },
+
+    // Dashboard Stats
+    dashboardStats: {
+        numberOfUsers: null,
+        numberLoggedIn: null
+    }
 });
 
 export default state;

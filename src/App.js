@@ -5,14 +5,8 @@ import Login from './js/pages/Login';
 import Main from './Main';
 import AuthRoutes from './js/routing/AuthRoutes';
 import { BrowserRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-
-const COOKIES = new Cookies();
 
 class App extends Component {
-    componentDidMount() {
-        document.documentElement.setAttribute('data-theme', COOKIES.get('_piedPiperTheme'));
-    }
     render() {
         return state.sessionID ? <Main /> : <BrowserRouter><AuthRoutes><Login /></AuthRoutes></BrowserRouter>;
     }

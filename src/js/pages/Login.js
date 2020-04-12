@@ -125,6 +125,7 @@ class Login extends Component {
                     }
                     COOKIES.set('_piedPiperSession', res.token.split(' ')[1], cookieOpts);
                     COOKIES.set('_piedPiperTheme', res.theme, cookieOpts);
+                    document.documentElement.setAttribute('data-theme', COOKIES.get('_piedPiperTheme'));
                     state.loading = false;
                 } else if (res.passwordincorrect === "Password incorrect") {
                     COOKIES.remove('_piedPiperSession');
