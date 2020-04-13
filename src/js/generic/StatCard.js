@@ -4,7 +4,7 @@ import { view } from 'react-easy-state';
 const cardStyle = {
     border: '1px solid var(--font-color)',
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: 'auto auto',
     padding: '20px',
     margin: '10px 0'
 }

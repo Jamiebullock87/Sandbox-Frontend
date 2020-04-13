@@ -53,7 +53,8 @@ let state = store({
     // Dashboard Stats
     dashboardStats: {
         numberOfUsers: null,
-        numberLoggedIn: null
+        numberLoggedIn: null,
+        userRegChart: []
     }
 });
 
