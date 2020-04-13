@@ -1,0 +1,10 @@
+.recharts-wrapper .recharts-y-axis .recharts-cartesian-axis-tick text {
+    font-family: $font;
+    fill: var(--font-color);
+  }
+
+  .recharts-text.recharts-label {
+      * {
+          fill: var(--font-color);
+      }
+  }

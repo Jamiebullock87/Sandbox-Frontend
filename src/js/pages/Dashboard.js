@@ -4,9 +4,12 @@ import state from '../state/State';
 import StatCard from '../generic/StatCard';
 import config from '../../config';
 import Loader from '../generic/Loader';
-import { ResponsiveContainer, LineChart, Line, Label, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, ...];
+const labelStyle = {
+    color: 'var(--font-color)'
+}
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -68,8 +71,8 @@ class Dashboard extends Component {
                     <ResponsiveContainer width="100%" height={500}>
                         <LineChart width={730} height={250} data={state.dashboardStats.userRegChart}
                             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                            <XAxis label="Date Registered" dataKey="createdAt" />
-                            <YAxis label={{ value: 'Number of Users', angle: -90, position: 'insideLeft' }} dataKey="total"/>
+                            <XAxis stroke="var(--font-color)" label="Date Registered" labelStyle={labelStyle} dataKey="createdAt" />
+                            <YAxis stroke="var(--font-color)" label={{ value: 'Number of Users', angle: -90, position: 'insideLeft' }} dataKey="total"/>
                             <Tooltip />
                             <Legend />
                             <Line type="monotone" name="Total Users" dataKey="total" stroke="#BADA55" />
