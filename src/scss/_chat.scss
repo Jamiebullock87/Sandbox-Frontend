@@ -8,10 +8,25 @@
     display: grid;
     grid-template-columns: 1fr 40px;
     grid-template-rows: 50px;
+    position: relative;
+    top: -1px;
 }
 .chat-input {
     width: 100%;
+    outline: none;
+    border-left: 1px solid var(--font-color);
+    border-bottom: 1px solid var(--font-color);
+    -webkit-appearance: none;
+    box-shadow: none;
+    border-style: outset;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--primary-color);
+    border-top: 1px solid var(--font-color);
 }
 .chat-send {
     width: 100%;
+    -webkit-appearance: none;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: 1px solid var(--primary-color);
 }
