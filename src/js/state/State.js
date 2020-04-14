@@ -55,7 +55,14 @@ let state = store({
         numberOfUsers: null,
         numberLoggedIn: null,
         userRegChart: []
+    },
+
+    // Chat
+    chat: {
+        inputMsg: '',
+        chatHistory: []
     }
+
 });
 
 export default state;

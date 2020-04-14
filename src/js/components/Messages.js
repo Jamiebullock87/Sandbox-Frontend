@@ -3,14 +3,14 @@ import { view } from 'react-easy-state';
 
 class Messages extends Component {
     componentDidMount() {
-        console.log(this.props.messages);
+        console.log('MessagesComponent', this.props.messages);
     }
     render() {
         return (
             <ul>
                 {this.props.messages.map((msg, key) => {
                     return (
-                        <li key={key}>{msg.message}</li>
+                        <li key={key}>{msg}</li>
                     )
                 })}
             </ul>
