@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { view } from 'react-easy-state';
 
-const cardStyle = {
-    border: '1px solid var(--font-color)',
-    display: 'grid',
-    gridTemplateColumns: 'auto auto',
-    padding: '20px',
-    margin: '10px 0'
-}
 class StatCard extends Component {
     render() {
         return (
-            <div style={cardStyle} className="stat-card">
-                <h3>{this.props.stat}</h3>
-                <h3>{this.props.value}</h3>
+            <div className="stat-card">
+                <h3>{this.props.heading}</h3>
+                <p style={{color: `${this.props.textColor}`}}>
+                {this.props.icon ? (
+                    <i className={`fas fa-${this.props.icon}`} />
+                ) : null}
+                <span>{this.props.value !== null ? this.props.value : null}</span>
+                </p>
+                <span>{this.props.description}</span>
             </div>
         )
     }

@@ -8,7 +8,19 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } f
 
 // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, ...];
 const labelStyle = {
-    color: 'var(--font-color)'
+    color: 'var(--font-color)',
+    fontFamily: 'sans-serif'
+}
+
+const chartContainer = {
+    margin: '20px 0',
+    padding: '20px',
+    backgroundColor: 'var(--bg-light-shadow)',
+    border: '1px solid var(--font-color)',
+    textAlign: 'center'
+}
+const wrapperStyle = {
+    bottom: '-5px'
 }
 
 class Dashboard extends Component {
@@ -56,28 +68,37 @@ class Dashboard extends Component {
                 <div className="dashstat-container">
                     {state.dashboardStats.numberOfUsers != null && state.dashboardStats.numberOfUsers.length < 0 ? <Loader relative /> : (
                         <StatCard
-                            stat="Total Number of Users"
+                            heading="Total Number of Users"
                             value={state.dashboardStats.numberOfUsers}
+                            textColor="var(--primary-color)"
+                            icon="users"
+                            description="Total number of registered users"
                         />
                     )}
                     {state.dashboardStats.numberLoggedIn != null && state.dashboardStats.numberLoggedIn.length < 0 ? <Loader relative /> : (
                         <StatCard
-                            stat="Total Logged In"
+                            heading="Total Logged In"
                             value={state.dashboardStats.numberLoggedIn}
+                            textColor="var(--secondary-color)"
+                            icon="eye"
+                            description="Total number of users currently logged in" 
                         />
                     )}
                 </div>
                 {state.dashboardStats.userRegChart != null && state.dashboardStats.userRegChart.length < 0 ? <Loader relative /> : (
+                    <div style={chartContainer}>
+                        <h3>Number of users signed up</h3>
                     <ResponsiveContainer width="100%" height={500}>
                         <LineChart width={730} height={250} data={state.dashboardStats.userRegChart}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                            <XAxis stroke="var(--font-color)" label="Date Registered" labelStyle={labelStyle} dataKey="createdAt" />
+                            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+                            <XAxis stroke="var(--font-color)" label={{ value: 'Date Registered', position: 'insideBottom' }} labelStyle={labelStyle} dataKey="createdAt" />
                             <YAxis stroke="var(--font-color)" label={{ value: 'Number of Users', angle: -90, position: 'insideLeft' }} dataKey="total"/>
                             <Tooltip />
-                            <Legend />
+                            <Legend verticalAlign="bottom" wrapperStyle={wrapperStyle} height={36}/>
                             <Line type="monotone" name="Total Users" dataKey="total" stroke="#BADA55" />
                         </LineChart>
                     </ResponsiveContainer>
+                    </div>
                 )}
                 
             </div>
