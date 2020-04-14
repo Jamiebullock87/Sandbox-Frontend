@@ -7,7 +7,7 @@ class Messages extends Component {
     }
     render() {
         return (
-            <ul>
+            <ul className="chat-messages">
                 {this.props.messages.map((msg, key) => {
                     return (
                         <li key={key}>{msg}</li>
