@@ -95,7 +95,7 @@ class Dashboard extends Component {
                             <YAxis stroke="var(--font-color)" label={{ value: 'Number of Users', angle: -90, position: 'insideLeft' }} dataKey="total"/>
                             <Tooltip />
                             <Legend verticalAlign="bottom" wrapperStyle={wrapperStyle} height={36}/>
-                            <Line type="monotone" name="Total Users" dataKey="total" stroke="#BADA55" />
+                            <Line type="monotone" name="Total Users" dataKey="total" stroke="var(--primary-color)" />
                         </LineChart>
                     </ResponsiveContainer>
                     </div>
