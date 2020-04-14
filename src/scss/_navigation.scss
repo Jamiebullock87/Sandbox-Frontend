@@ -6,6 +6,8 @@
     padding: 40px 0;
     border-right: 1px solid var(--font-color);
     background-color: var(--bg-color);
+    height: 100vh;
+    overflow-y: hidden;
     a {
         color: var(--font-color);
         &.selected {

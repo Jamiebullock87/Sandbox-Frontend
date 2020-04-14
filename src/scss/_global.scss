@@ -9,6 +9,7 @@ html, body, #root {
     background-color: var(--bg-color);
     color: var(--font-color);
     padding: 40px;
+    overflow-y: scroll;
     h1 {
         margin-bottom: 20px;
     }
