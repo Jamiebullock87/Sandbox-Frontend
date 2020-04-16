@@ -29,7 +29,7 @@ class MainRoutes extends Component {
             {val: 'user-profile', depth: 6},
         ];
         if (depth === "") {
-            return depth = 0;
+            return 0;
         } else {
             return depthOptions.filter(depthVal => depthVal.val === depth)[0].depth;
         }
