@@ -36,7 +36,6 @@ class UserProfile extends Component {
             state.loggedInUser.email = res.email;
             state.loggedInUser.image = res.image;
             state.loggedInUser.whatTheme = res.whatTheme;
-            console.log(state.loggedInUser);
         })
     }
 
@@ -70,7 +69,6 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             state.loggedInUser.firstName = res.firstName;
             state.loggedInUser.lastName = res.lastName;
             state.loggedInUser.email = res.email;
@@ -94,43 +92,43 @@ class UserProfile extends Component {
     }
     render() {
         return (
-            <>
+            <div className="page">
                 <h1>User Profile</h1>
-                        <div className="user-profile">
-                            <div>
-                                {state.loggedInUser.firstName ? 
-                                    <>
-                                    <h2>Welcome back {state.loggedInUser.firstName} {state.loggedInUser.lastName}</h2>
-                                    <button onClick={() => this.setState(prevState => ({updateName: !prevState.updateName}))}>Change Name?</button>
-                                    </>
-                                    :
-                                    <UpdateName />
-                                }
-                                {this.state.updateName ? 
-                                    <UpdateName />
-                                    :
-                                    ''
-                                }
-                                
-                                <RadioSelector
-                                    heading="Preferred Theme"
-                                    name="theme"
-                                    options={[
-                                    { text: 'Dark', value: 'dark' },
-                                    { text: 'Light', value: 'light' }
-                                    ]}
-                                    onChange={e => { state.loggedInUser.whatTheme = e }}
-                                    default={state.loggedInUser.whatTheme}
-                                />
-                            </div>
-                            <div>
-                                <img src={state.loggedInUser.image != null && state.loggedInUser.image.length > 0 ? state.loggedInUser.image : 'https://via.placeholder.com/200x250'} alt=""/>
-                                <input className="file-input" id="profile-img" name="profile-img" type="file"/>
-                                <label className="file-input-label" htmlFor="profile-img">Upload / Change</label>
-                            </div>
-                        </div>
-                        <button className="btn-main" onClick={this.handleSave}>Save</button>
-            </>
+                <div className="user-profile">
+                    <div>
+                        {state.loggedInUser.firstName ? 
+                            <>
+                            <h2>Welcome back {state.loggedInUser.firstName} {state.loggedInUser.lastName}</h2>
+                            <button onClick={() => this.setState(prevState => ({updateName: !prevState.updateName}))}>Change Name?</button>
+                            </>
+                            :
+                            <UpdateName />
+                        }
+                        {this.state.updateName ? 
+                            <UpdateName />
+                            :
+                            ''
+                        }
+                        
+                        <RadioSelector
+                            heading="Preferred Theme"
+                            name="theme"
+                            options={[
+                            { text: 'Dark', value: 'dark' },
+                            { text: 'Light', value: 'light' }
+                            ]}
+                            onChange={e => { state.loggedInUser.whatTheme = e }}
+                            default={state.loggedInUser.whatTheme}
+                        />
+                    </div>
+                    <div>
+                        <img src={state.loggedInUser.image != null && state.loggedInUser.image.length > 0 ? state.loggedInUser.image : 'https://via.placeholder.com/200x250'} alt=""/>
+                        <input className="file-input" id="profile-img" name="profile-img" type="file"/>
+                        <label className="file-input-label" htmlFor="profile-img">Upload / Change</label>
+                    </div>
+                </div>
+                <button className="btn-main" onClick={this.handleSave}>Save</button>
+            </div>
         )
     }
 }

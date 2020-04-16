@@ -58,12 +58,11 @@ class Dashboard extends Component {
                     }
                     return acc;
                 }, []);
-            console.log(state.dashboardStats.userRegChart);
         })
     }
     render() {
         return (
-            <div className="dashboard">
+            <div className="dashboard page">
                 <h1>Dashboard</h1>
                 <div className="dashstat-container">
                     {state.dashboardStats.numberOfUsers != null && state.dashboardStats.numberOfUsers.length < 0 ? <Loader relative /> : (

@@ -2,68 +2,69 @@ import React, { Component } from 'react';
 import { view } from 'react-easy-state';
 import state from '../state/State';
 import Messages from '../components/Messages';
-// import socketClient from 'socket.io-client';
-// const socket = socketClient('http://localhost:8000');
+import config from '../../config';
+import socketClient from 'socket.io-client';
+
+const socket = socketClient('http://localhost:8000', {
+    autoConnect: false,
+    forceNew: true
+});
 
 class Chat extends Component {
-    // New Websocket implementation
-    
-    ws = new WebSocket('ws://localhost:8000/')
-    connectToWebSocket() {
-        this.ws.onopen = () => {
-            console.log('connected');
-        }
-    }
     componentDidMount() {
-        // New and Shiny
-        this.ws.onmessage = (e) => {
-            console.log(e.data)
-            state.chat.chatHistory.push(e.data);
-            console.log(state.chat.chatHistory);
-        }
-        this.ws.onclose = (e) => {
-            console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
-            setTimeout(function() {
-                this.connectToWebSocket();
-            }, 1000);
-        };
-        
-        this.ws.onerror = (err) => {
-            console.error('Socket encountered error: ', err.message, 'Closing socket');
-            this.ws.close();
-        };
-            
-        // Old Implementation
-        // socket.on("user connected", function(user) {
-        //     state.chat.chatHistory.push(user + 'Connected');
-        // });
-        // socket.on('chat-message', function(msg) {
-        //     console.log(msg);
-        //     state.chat.chatHistory.push(msg);
-        //     console.log(state.chat);
-        // });
-        // console.log(state.chat.inputMsg);
+
+        socket.open();
+        fetch(config.apiEndpoint + '/restricted/getprofile', {
+            method: 'post',
+            headers: {
+                Authorization: `Bearer ${state.sessionID}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: null
+        })
+        .then(res => res.json())
+        .then(res => {
+            // Set local state with whats fetched from the db and hence whats on this page
+            state.loggedInUser.firstName = res.firstName;
+            state.loggedInUser.lastName = res.lastName;
+            console.log(state.loggedInUser);
+        })
+        socket.on('chat-message', function(msg) {
+            console.log(msg);
+            if (msg !== 'User Disconnected') {
+                state.chat.chatHistory.push(msg);
+            }
+            console.log(state.chat);
+        });
     }
     componentWillUnmount() {
         state.chat.inputMsg = '';
+        state.chat.chatHistory = [];
+        console.log(state.chat.chatHistory);
+        socket.emit('terminate');
+        socket.disconnect(0);
+        socket.disconnect();
     }
-    sendSocketIO = (e) => {
+    sendSocketIO = (e, msg) => {
         e.preventDefault();
-        this.ws.send(state.chat.inputMsg)
+        socket.emit('chat-message', msg, (data) => {
+            console.log(this.state);
+        });
         state.chat.inputMsg = '';
     }
     render() {
         return (
-            <>
+            <div className="page">
                 <h1>Chat Page</h1>
-                <form onSubmit={(e) => this.sendSocketIO(e)}>
+                <form onSubmit={(e) => this.sendSocketIO(e, state.chat.inputMsg)}>
                     <Messages messages={state.chat.chatHistory} />
                     <div className="chat-input-wrapper">
                         <input className="chat-input" id="message" value={state.chat.inputMsg} onChange={e => {state.chat.inputMsg = e.currentTarget.value}} type="text"/>
                         <button className="chat-send" type="submit">Send</button>
                     </div>
                 </form>
-            </>
+            </div>
         )
     }
 }

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { view } from 'react-easy-state';
 
 class Messages extends Component {
-    componentDidMount() {
-        console.log('MessagesComponent', this.props.messages);
-    }
     render() {
         return (
             <ul className="chat-messages">

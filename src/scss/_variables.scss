@@ -17,6 +17,7 @@ $font: 'Spartan';
     --bg-color: #fff;
     --bg-light-shadow: #dedede;
     --bg-dark-shadow: #a4a4a4;
+    --button-text: #efefef;
 }
 
 [data-theme="dark"] {
@@ -26,4 +27,5 @@ $font: 'Spartan';
     --bg-color: #191919;
     --bg-light-shadow: #262626;
     --bg-dark-shadow: #0d0d0d;
+    --button-text: #efefef;
 }
