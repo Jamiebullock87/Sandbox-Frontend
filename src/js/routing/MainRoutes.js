@@ -11,6 +11,7 @@ class MainRoutes extends Component {
         this.state = {
             prevDepth: this.calculateRouteDepth(this.props.location)
         }
+        console.log(this.props.location);
     }
     componentWillReceiveProps() {
         this.setState({
@@ -27,10 +28,15 @@ class MainRoutes extends Component {
             {val: 'chat', depth: 5},
             {val: 'user-profile', depth: 6},
         ];
-        return depthOptions.filter(depthVal => depthVal.val === depth)[0].depth;
+        if (depth === "") {
+            return depth = 0;
+        } else {
+            return depthOptions.filter(depthVal => depthVal.val === depth)[0].depth;
+        }
     }
     render() {
         const { location } = this.props;
+        console.log(location);
         const timeout = {
             enter: 500,
             exit: 500
