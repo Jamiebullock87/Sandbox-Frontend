@@ -61,6 +61,35 @@ let state = store({
     chat: {
         inputMsg: '',
         chatHistory: []
+    },
+
+    tickets: {
+        clients: [
+            {value: 'client-1', name: 'Client 1'},
+            {value: 'client-2', name: 'Client 2'},
+            {value: 'client-3', name: 'Client 3'},
+        ],
+        create: {
+            title: '',
+            to: '',
+            raised: '',
+            subject: '',
+            client: '',
+            brief: '',
+            message: '',
+        }
+    },
+
+    clients: {
+        addClient: {
+            identifier: '',
+            name: '',
+            telephone: 0,
+            contact: '',
+            directTelephone: 0,
+            email: ''
+        },
+        clientList: []
     }
 
 });

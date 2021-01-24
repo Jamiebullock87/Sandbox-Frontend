@@ -66,3 +66,10 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 }
+
+.clients-list {
+    .client-row {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+    }
+}

@@ -133,3 +133,9 @@
         border: 1px solid var(--primary-color);
     }
 }
+#ticket-brief, #ticket-email {
+    height: 120px;
+    margin-bottom: 30px;
+    text-indent: 0;
+    padding: 10px 8px 4px;
+}

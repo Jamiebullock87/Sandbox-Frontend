@@ -25,10 +25,10 @@ class Navigation extends Component {
             <NavLink to="/dashboard" activeClassName="selected">
                 <i className="fas fa-2x fa-laptop-code" />
             </NavLink>
-            <NavLink to="/link2" activeClassName="selected">
+            <NavLink to="/tickets" activeClassName="selected">
                 <i className="fas fa-2x fa-poo-storm" />
             </NavLink>
-            <NavLink to="/link3" activeClassName="selected">
+            <NavLink to="/clients" activeClassName="selected">
                 <i className="fas fa-2x fa-meteor" />
             </NavLink>
             <NavLink to="/link4" activeClassName="selected">

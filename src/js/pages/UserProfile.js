@@ -122,7 +122,7 @@ class UserProfile extends Component {
                         />
                     </div>
                     <div>
-                        <img src={state.loggedInUser.image != null && state.loggedInUser.image.length > 0 ? state.loggedInUser.image : 'https://via.placeholder.com/200x250'} alt=""/>
+                        <img loading="lazy" src={state.loggedInUser.image != null && state.loggedInUser.image.length > 0 ? state.loggedInUser.image : 'https://via.placeholder.com/200x250'} alt=""/>
                         <input className="file-input" id="profile-img" name="profile-img" type="file"/>
                         <label className="file-input-label" htmlFor="profile-img">Upload / Change</label>
                     </div>
