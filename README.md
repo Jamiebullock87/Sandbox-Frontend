@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Codename - Pied Piper :) 
+Codename - Pied Piper :)
+
+Just a fun sandbox web app for me to try out different technologies. Plan is to include a real time chat page using web sockets. Going to build a CRM type ticketing system with some basic CRUD functionality with data stored in mongo db. Eventually some other fun functionality too when I get some more free time!
 
 ## Available Scripts
 
