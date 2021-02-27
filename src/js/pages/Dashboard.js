@@ -35,29 +35,31 @@ class Dashboard extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            state.dashboardStats.numberOfUsers = res.numberOfUsers;
-            state.dashboardStats.numberLoggedIn = res.numberLoggedIn;
-            state.dashboardStats.userRegChart = res.userRegChart.reduce((acc, cur, idx) => {
-                cur._id = idx;
-                cur.total = idx + 1; // Not really sure how this works, but it does. Dont touch
-                acc.push(cur);
-                return acc;
-            }, [])
-                .sort((a, b) => b.createdAt - a.createdAt) // Sort by createdAt date
-                // Another reducer to leave datestamp as just date without the time
-                .reduce((acc, cur, index, src) => {
-                    cur.createdAt = cur.createdAt.split('T')[0];
-                    acc.push(cur);
-                    index = Number(index);
-                    if (index !== 0 && index !== src.length -1) { // Only perform from second iteration onwards, cant compare to previous with only 1 item
-                        // compare current item createdAt to acc (previous) createdAt
-                        if (cur.createdAt === acc[index - 1].createdAt) {
-                            // If current item date = one before it in final array, delete final array one 
-                            acc.shift();
-                        }
-                    }
-                    return acc;
-                }, []);
+            state.dashboardStats.numberOfUsers = res.numberOfUsers.count;
+            state.dashboardStats.numberLoggedIn = res.numberLoggedIn.count;
+            console.log(typeof(state.dashboardStats.numberOfUsers));
+            console.log(typeof(state.dashboardStats.numberLoggedIn));
+            // state.dashboardStats.userRegChart = res.userRegChart.reduce((acc, cur, idx) => {
+            //     cur._id = idx;
+            //     cur.total = idx + 1; // Not really sure how this works, but it does. Dont touch
+            //     acc.push(cur);
+            //     return acc;
+            // }, [])
+            //     .sort((a, b) => b.createdAt - a.createdAt) // Sort by createdAt date
+            //     // Another reducer to leave datestamp as just date without the time
+            //     .reduce((acc, cur, index, src) => {
+            //         cur.createdAt = cur.createdAt.split('T')[0];
+            //         acc.push(cur);
+            //         index = Number(index);
+            //         if (index !== 0 && index !== src.length -1) { // Only perform from second iteration onwards, cant compare to previous with only 1 item
+            //             // compare current item createdAt to acc (previous) createdAt
+            //             if (cur.createdAt === acc[index - 1].createdAt) {
+            //                 // If current item date = one before it in final array, delete final array one 
+            //                 acc.shift();
+            //             }
+            //         }
+            //         return acc;
+            //     }, []);
         })
     }
     render() {
@@ -65,7 +67,7 @@ class Dashboard extends Component {
             <div className="dashboard page">
                 <h1>Dashboard</h1>
                 <div className="dashstat-container">
-                    {state.dashboardStats.numberOfUsers != null && state.dashboardStats.numberOfUsers.length < 0 ? <Loader relative /> : (
+                    {state.dashboardStats.numberOfUsers != null && state.dashboardStats.numberOfUsers < 0 ? <Loader relative /> : (
                         <StatCard
                             heading="Total Number of Users"
                             value={state.dashboardStats.numberOfUsers}
@@ -74,7 +76,7 @@ class Dashboard extends Component {
                             description="Total number of registered users"
                         />
                     )}
-                    {state.dashboardStats.numberLoggedIn != null && state.dashboardStats.numberLoggedIn.length < 0 ? <Loader relative /> : (
+                    {state.dashboardStats.numberLoggedIn != null && state.dashboardStats.numberLoggedIn < 0 ? <Loader relative /> : (
                         <StatCard
                             heading="Total Logged In"
                             value={state.dashboardStats.numberLoggedIn}
@@ -84,7 +86,7 @@ class Dashboard extends Component {
                         />
                     )}
                 </div>
-                {state.dashboardStats.userRegChart != null && state.dashboardStats.userRegChart.length < 0 ? <Loader relative /> : (
+                {/* {state.dashboardStats.userRegChart != null && state.dashboardStats.userRegChart.length < 0 ? <Loader relative /> : (
                     <div style={chartContainer}>
                         <h3>Number of users signed up</h3>
                     <ResponsiveContainer width="100%" height={500}>
@@ -98,7 +100,7 @@ class Dashboard extends Component {
                         </LineChart>
                     </ResponsiveContainer>
                     </div>
-                )}
+                )} */}
                 
             </div>
         );

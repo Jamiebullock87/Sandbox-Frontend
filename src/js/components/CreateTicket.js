@@ -106,9 +106,8 @@ class CreateTicket extends Component {
                     />
                     <label className="form-label">Brief</label>
                 </div>
-                <textarea id="ticket-message" className="form-input">
-                    Hi , 
-                    We have received your support request. A member of our team is dealing with your request.
+                <textarea id="ticket-message" className="form-input" defaultValue="Hi , 
+                    We have received your support request. A member of our team is dealing with your request.">
                 </textarea>
                 <button onClick={this.handleCreateTicket}>Create</button>
             </>
