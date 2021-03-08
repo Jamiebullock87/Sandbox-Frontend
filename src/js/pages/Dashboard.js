@@ -4,24 +4,12 @@ import state from '../state/State';
 import StatCard from '../generic/StatCard';
 import config from '../../config';
 import Loader from '../generic/Loader';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
-// const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, ...];
-const labelStyle = {
-    color: 'var(--font-color)',
-    fontFamily: 'sans-serif'
-}
+// Todo - add some more stuff here, some cool stats and things?
 
-const chartContainer = {
-    margin: '20px 0',
-    padding: '20px',
-    backgroundColor: 'var(--bg-light-shadow)',
-    border: '1px solid var(--font-color)',
-    textAlign: 'center'
-}
-const wrapperStyle = {
-    bottom: '-5px'
-}
+// Some links to other pages?
+
+// Maybe some realtime data with websockets
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -39,27 +27,7 @@ class Dashboard extends Component {
             state.dashboardStats.numberLoggedIn = res.numberLoggedIn.count;
             console.log(typeof(state.dashboardStats.numberOfUsers));
             console.log(typeof(state.dashboardStats.numberLoggedIn));
-            // state.dashboardStats.userRegChart = res.userRegChart.reduce((acc, cur, idx) => {
-            //     cur._id = idx;
-            //     cur.total = idx + 1; // Not really sure how this works, but it does. Dont touch
-            //     acc.push(cur);
-            //     return acc;
-            // }, [])
-            //     .sort((a, b) => b.createdAt - a.createdAt) // Sort by createdAt date
-            //     // Another reducer to leave datestamp as just date without the time
-            //     .reduce((acc, cur, index, src) => {
-            //         cur.createdAt = cur.createdAt.split('T')[0];
-            //         acc.push(cur);
-            //         index = Number(index);
-            //         if (index !== 0 && index !== src.length -1) { // Only perform from second iteration onwards, cant compare to previous with only 1 item
-            //             // compare current item createdAt to acc (previous) createdAt
-            //             if (cur.createdAt === acc[index - 1].createdAt) {
-            //                 // If current item date = one before it in final array, delete final array one 
-            //                 acc.shift();
-            //             }
-            //         }
-            //         return acc;
-            //     }, []);
+            
         })
     }
     render() {
@@ -86,22 +54,6 @@ class Dashboard extends Component {
                         />
                     )}
                 </div>
-                {/* {state.dashboardStats.userRegChart != null && state.dashboardStats.userRegChart.length < 0 ? <Loader relative /> : (
-                    <div style={chartContainer}>
-                        <h3>Number of users signed up</h3>
-                    <ResponsiveContainer width="100%" height={500}>
-                        <LineChart width={730} height={250} data={state.dashboardStats.userRegChart}
-                            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
-                            <XAxis stroke="var(--font-color)" label={{ value: 'Date Registered', position: 'insideBottom' }} labelStyle={labelStyle} dataKey="createdAt" />
-                            <YAxis stroke="var(--font-color)" label={{ value: 'Number of Users', angle: -90, position: 'insideLeft' }} dataKey="total"/>
-                            <Tooltip />
-                            <Legend verticalAlign="bottom" wrapperStyle={wrapperStyle} height={36}/>
-                            <Line type="monotone" name="Total Users" dataKey="total" stroke="var(--primary-color)" />
-                        </LineChart>
-                    </ResponsiveContainer>
-                    </div>
-                )} */}
-                
             </div>
         );
     }

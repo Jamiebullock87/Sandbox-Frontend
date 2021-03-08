@@ -38,9 +38,11 @@ let state = store({
     sessionID: COOKIES.get('_piedPiperSession') ? COOKIES.get('_piedPiperSession') : false,
 
     // User Profile
+    updateName: false,
     editUser: {
         firstName: null,
         lastName: null,
+        image: null
     },
     loggedInUser: {
         firstName: null,

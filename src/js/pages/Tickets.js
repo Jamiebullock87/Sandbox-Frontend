@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { view } from 'react-easy-state';
 import { NavLink } from 'react-router-dom';
 
+// Todo -
+// Display current tickets, fetch data from DB
+// Add ability to click into a ticket to see more details
+
 class Tickets extends Component {
     render() {
         return (

@@ -19,6 +19,7 @@ class Clients extends Component {
         .then(res => res.json())
         .then(res => {
             state.clients.clientList = res.clients;
+            console.log(state.clients.clientList);
         })
     }
 

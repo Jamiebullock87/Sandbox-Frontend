@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { view } from 'react-easy-state';
-import state from '../state/State';
+// import state from '../state/State';
 
 class Ticket extends Component {
     render() {
